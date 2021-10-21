@@ -6,7 +6,8 @@ const BASE_URL = 'pixabay.com/api'
  class ImageApiService {
 
      constructor() {
-         this.searchQuery = 'cat';
+         //По умолчанию для первой загрузки будет запрос на картинки природы
+         this.searchQuery = 'nature';
          this.page = 1;
     };
     
@@ -15,13 +16,17 @@ const BASE_URL = 'pixabay.com/api'
             return fetch(`https://${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${KEY_API} `)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         //this.page += 1;
                         this.incerementPage();
                         
                         return  data.hits;
                     });
     } 
+
+    // firstLoad () {
+    //     nature
+    // }
 
      get query() {
          return this.searchQuery;
