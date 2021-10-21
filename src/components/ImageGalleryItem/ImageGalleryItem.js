@@ -4,17 +4,24 @@ import s from './ImageGalleryItem.module.css'
 
 class ImageGalleryItem extends Component {
 
+    state = {
+        webformatURL: "",
+        largeImageURL: "",
+        tags:"" 
+      }
+
+
     render() {
-        const { pageURL } = this.props;
+        const {webformatURL, tags } = this.props;
         return (
         //    <p> ImageGalleryItem </p>
-        <img src={pageURL} alt="Какая-то картинка" className="ImageGalleryItem-image" />
+        <img src={webformatURL} alt={tags} className={s.ImageGalleryItemImage} />
         )
     }
 }
 
 ImageGalleryItem.propTypes = {
-     pageURL: PropTypes.string.isRequired,
+    webformatURL: PropTypes.string.isRequired,
 };
 
 

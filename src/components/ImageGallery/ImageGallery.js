@@ -14,13 +14,12 @@ class ImageGallery extends Component {
         const { imagesArray } = this.props;
         return (
         //    <p> ImageGallery </p>
-        <ul>
+        <ul className={s.ImageGallery}>
         {/* <span className= {s.contactsListTitle}>Contacts</span> */}
-        { imagesArray.map(({id, pageURL}) => (
+        { imagesArray.map(({id, webformatURL, largeImageURL, tags }) => (
             <li  key = {id}>
-Проверка изображения: (`id = ${id} pageURL=${pageURL}`)
               {/* ВНИМАНИЕ!  Важный синтаксис во время прокидывания пропов по цепочке: onDelete = {()=>onDeleteContact(id)} */}
-                  <ImageGalleryItem pageURL={pageURL} />
+                  <ImageGalleryItem webformatURL={webformatURL}  largeImageURL={largeImageURL} tags={tags}/>
             </li>
           ))}
       </ul>
@@ -33,7 +32,8 @@ ImageGallery.propTypes = {
     state: PropTypes.arrayOf(
         // Объект с определённой структурой
         PropTypes.shape({
-            pageURL: PropTypes.string.isRequired,
+            webformatURL: PropTypes.string.isRequired,
+            largeImageURL: PropTypes.string.isRequired
         }),
     ), 
   };

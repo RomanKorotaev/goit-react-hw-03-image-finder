@@ -7,6 +7,8 @@ import Loader from './components/Loader'
 import Button from './components/Button'
 import Modal from './components/Modal'
 
+// import './App.css'
+
 
 ////------------------GET-запрос -------------------
 
