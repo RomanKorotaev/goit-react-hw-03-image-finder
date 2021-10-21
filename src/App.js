@@ -85,6 +85,7 @@ componentDidUpdate (prevProp, prevState) {
 
     // Вызываем метод (сеттер) класса ImageApiService() для перезаписи в его конструкторе значения поискового слова
     imageApiService.query = this.state.quiryWord;
+    console.log ( "Записываем в класс новое поисковое слово  imageApiService.query = this.state.quiryWord;")
 
      imageApiService.fetchImages()
       .then (hits=>{
@@ -133,15 +134,13 @@ handleSummitForm = quiryWord => {
        {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метот класса как пром в дочерний react-компонент  */}
         <Searchbar onSubmit= {this.handleSummitForm}/>
 
-        {/* <Searchbar /> */}
-
-        <ImageGallery imagesArray= {this.state.imagesArray}/>
+       <ImageGallery imagesArray= {this.state.imagesArray}/>
         
         <Loader />
         <Button />
         <Modal />
 
-        </div>
+      </div>
     )
   }
 }
