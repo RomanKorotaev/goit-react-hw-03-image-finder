@@ -24,9 +24,6 @@ const BASE_URL = 'pixabay.com/api'
                     });
     } 
 
-    // firstLoad () {
-    //     nature
-    // }
 
      get query() {
          return this.searchQuery;

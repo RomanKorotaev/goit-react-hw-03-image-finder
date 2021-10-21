@@ -13,10 +13,9 @@ class ImageGallery extends Component {
     render() {
         const { imagesArray } = this.props;
         return (
-        //    <p> ImageGallery </p>
+        
         <ul className={s.ImageGallery}>
-        {/* <span className= {s.contactsListTitle}>Contacts</span> */}
-        { imagesArray.map(({id, webformatURL, largeImageURL, tags }) => (
+               { imagesArray.map(({id, webformatURL, largeImageURL, tags }) => (
             <li  key = {id}>
               {/* ВНИМАНИЕ!  Важный синтаксис во время прокидывания пропов по цепочке: onDelete = {()=>onDeleteContact(id)} */}
                   <ImageGalleryItem webformatURL={webformatURL}  largeImageURL={largeImageURL} tags={tags}/>

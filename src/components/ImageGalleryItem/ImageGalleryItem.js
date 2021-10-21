@@ -14,7 +14,6 @@ class ImageGalleryItem extends Component {
     render() {
         const {webformatURL, tags } = this.props;
         return (
-        //    <p> ImageGalleryItem </p>
         <img src={webformatURL} alt={tags} className={s.ImageGalleryItemImage} />
         )
     }
