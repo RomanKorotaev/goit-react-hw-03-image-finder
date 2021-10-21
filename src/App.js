@@ -7,7 +7,17 @@ import Loader from './components/Loader'
 import Button from './components/Button'
 import Modal from './components/Modal'
 
+////------------------GET-запрос -------------------
+
+import ImageApiService from './js/apiService'
+const imageApiService = new ImageApiService();
+imageApiService.fetchImages();
+
+
+
 class App extends Component {
+
+
 
   render () {
     return (
@@ -54,18 +64,3 @@ export default App;
 
 // export default App;
 
-
-// const KEY_API = '23193680-1d95b6a7ab6e160162f942df5'
-// const BASE_URL = 'pixabay.com/api'
-
-// fetchImages() {
-//   return fetch(`https://${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${KEY_API} `)
-//           .then(response => response.json())
-//           .then(data => {
-//               //console.log(data)
-//               //this.page += 1;
-//               this.incerementPage();
-              
-//               return  data.hits;
-//           });
-// } 
