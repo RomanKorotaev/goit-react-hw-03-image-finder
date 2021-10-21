@@ -83,7 +83,8 @@ componentDidUpdate (prevProp, prevState) {
     
     localStorage.setItem ("hits", JSON.stringify(this.state.imagesArray) );
 
-    imageApiService.query(this.state.quiryWord);
+    // Вызываем метод (сеттер) класса ImageApiService() для перезаписи в его конструкторе значения поискового слова
+    imageApiService.query = this.state.quiryWord;
 
      imageApiService.fetchImages()
       .then (hits=>{
