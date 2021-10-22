@@ -5,7 +5,12 @@ class Modal extends Component {
 
     render() {
         return (
-           <p> Modal </p>
+            <div className="Overlay">
+            <div className="Modal">
+              
+              <img src={this.props.largeImageURL} alt="" />
+            </div>
+          </div>
         )
     }
 }

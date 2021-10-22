@@ -9,13 +9,24 @@ class ImageGallery extends Component {
         imagesArray: [],
       }
 
+onImgClickImageGallery = (largeImageURL) => {
+  console.log ('Сработала функция onImgClickImageGallery. Клинули на  Img   . largeImageURL = ', largeImageURL);
+this.props.onImgClick(largeImageURL)
+}
+
     render() {
         const { imagesArray } = this.props;
         return (
                   <ul className={s.ImageGallery}>
                   { imagesArray.map(({id, webformatURL, largeImageURL, tags }) => (
                     <li  key = {id}>
-                        <ImageGalleryItem webformatURL={webformatURL}  largeImageURL={largeImageURL} tags={tags}/>
+                        <ImageGalleryItem 
+                          webformatURL={webformatURL}
+                          largeImageURL={largeImageURL}
+                          tags={tags}
+                          id= {id}
+                          onImgClickImageGalleryItem = {this.onImgClickImageGallery}
+                          />
                     </li>
                 ))}
              </ul>

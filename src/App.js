@@ -7,6 +7,8 @@ import Loader from './components/Loader'
 import Button from './components/Button'
 import Modal from './components/Modal'
 
+
+
 // import './App.css'
 
 
@@ -16,12 +18,6 @@ import ImageApiService from './js/apiService'
 
 
 const imageApiService = new ImageApiService();
-let hitsArray = []
-
-
-/////////////----
-
-////////////////------
 
 
 class App extends Component {
@@ -29,6 +25,9 @@ class App extends Component {
 state = {
   imagesArray: [],
   quiryWord: "",
+  isLoading: false,
+  largeImageURL: '',
+
 }
 
 componentDidMount () {
@@ -48,7 +47,9 @@ componentDidMount () {
 componentDidUpdate (prevProp, prevState) {
 
   if ( this.state.quiryWord !== prevState.quiryWord) {
-    imageApiService.query = this.state.quiryWord;
+    
+    imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
+    imageApiService.query = this.state.quiryWord; // обновляем значение поискового слова
 
     imageApiService.fetchImages()
     .then (hits=>{
@@ -85,8 +86,13 @@ handleLoadMore = () => {
                   top: document.documentElement.scrollHeight,
                   behavior: 'smooth',
                 });
-
       });   
+}
+
+handleOnImgClick = (largeImageURL) => {
+  console.log ('Сработала функция handleOnImgClick. Клинули на  Img   .   largeImageURL = ', largeImageURL);
+  this.setState ({largeImageURL:  largeImageURL })
+
 }
 
 
@@ -98,11 +104,13 @@ handleLoadMore = () => {
        {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метот класса как пром в дочерний react-компонент  */}
         <Searchbar onSubmit= {this.handleSummitForm}/>
 
-       <ImageGallery imagesArray= {this.state.imagesArray}/>
+       <ImageGallery 
+       imagesArray= {this.state.imagesArray}
+       onImgClick = {this.handleOnImgClick}/>
         
         <Loader />
         <Button onLoadMoreBtn = {this.handleLoadMore}/>
-        <Modal />
+        <Modal largeImageURL={this.state.largeImageURL}/>
 
       </div>
     )
