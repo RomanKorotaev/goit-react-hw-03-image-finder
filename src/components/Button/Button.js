@@ -5,6 +5,12 @@ class Button extends Component {
 
     handleClickBtn = event=> {
         console.log ('Сработала функция handleClickBtn. Клинули на кнопке Загрузить ещё ', event);
+      
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
+
  this.props.onLoadMoreBtn();
     }
 

@@ -75,13 +75,18 @@ handleLoadMore = () => {
       .then (hits=>{
         if (hits.length !== 0) {
              this.setState ( (prevState) =>{
-            
-            return {
+                  return {
                       imagesArray: [...prevState.imagesArray, ...hits]
                   } 
           } )
         }   
-      });
+
+        window.scrollTo({
+                  top: document.documentElement.scrollHeight,
+                  behavior: 'smooth',
+                });
+
+      });   
 }
 
 
