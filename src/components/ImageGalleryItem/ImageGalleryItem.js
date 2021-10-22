@@ -12,7 +12,7 @@ class ImageGalleryItem extends Component {
 
 
     render() {
-        const {webformatURL, tags } = this.props;
+                const {webformatURL, tags } = this.props;
         return (
         <img src={webformatURL} alt={tags} className={s.ImageGalleryItemImage} />
         )
@@ -20,7 +20,7 @@ class ImageGalleryItem extends Component {
 }
 
 ImageGalleryItem.propTypes = {
-    webformatURL: PropTypes.string.isRequired,
+    webformatURL: PropTypes.string,
 };
 
 
