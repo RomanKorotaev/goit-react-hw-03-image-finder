@@ -31,17 +31,6 @@ state = {
 
 }
 
-// toggleModal = ()=> {
-//   this.setState (prevState=> ({
-//     showModal: !this.state.showModal
-//   }))
-// }
- 
-toggleModal = ()=> {
-  this.setState ( ({showModal})=> ({
-    showModal: !showModal
-  }))
-}
 
 
 componentDidMount () {
@@ -110,6 +99,21 @@ handleOnImgClick = (largeImageURL) => {
   this.toggleModal();
 }
 
+// toggleModal = ()=> {
+//   this.setState (prevState=> ({
+//     showModal: !this.state.showModal
+//   }))
+// }
+ 
+toggleModal = ()=> {
+  this.setState ( ({showModal})=> ({
+    showModal: !showModal
+  }))
+}
+
+
+
+
 
   render () {
 
@@ -128,8 +132,13 @@ handleOnImgClick = (largeImageURL) => {
         
         <Loader />
         <Button onLoadMoreBtn = {this.handleLoadMore}/>
-        { showModal && <Modal largeImageURL={largeImageURL}/> }
-        {/* <Modal largeImageURL={largeImageURL}/> */}
+
+       {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
+        { showModal && <Modal >
+
+          <img src={largeImageURL} alt="picture" />
+
+          </Modal> }
 
       </div>
     )
