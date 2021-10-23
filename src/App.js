@@ -25,10 +25,9 @@ class App extends Component {
 state = {
   imagesArray: [],
   quiryWord: "",
-  isLoading: false,
   largeImageURL: '',
   showModal: false,
-
+  isLoading: false,
 }
 
 
@@ -36,15 +35,22 @@ state = {
 componentDidMount () {
 
   console.log (" App: componentDidMount ()");
+this.setState ({ isLoading: true})
 
-  imageApiService.fetchImages()
-  .then (hits=>{
-        // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-        if (hits.length !== 0) { 
-          this.setState ({imagesArray:  hits })
-          console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
-        }
-  });
+setTimeout(() => {
+  
+      imageApiService.fetchImages()
+      .then (hits=>{
+            // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+            if (hits.length !== 0) { 
+              this.setState ({imagesArray:  hits })
+              console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
+            }
+      })
+      .finally( ()=> this.setState({isLoading: false}));
+      
+}, 1500);
+
 }
 
 componentDidUpdate (prevProp, prevState) {
@@ -125,19 +131,19 @@ toggleModal = ()=> {
        
        {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метот класса как пром в дочерний react-компонент  */}
         <Searchbar onSubmit= {this.handleSummitForm}/>
+     
+      {this.state.isLoading && <Loader />}  
 
        <ImageGallery 
        imagesArray= {imagesArray}
        onImgClick = {this.handleOnImgClick}/>
         
-        <Loader />
+        
         <Button onLoadMoreBtn = {this.handleLoadMore}/>
 
        {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
-        { showModal && <Modal >
-
+        { showModal && <Modal onModalClose={this.toggleModal}>
           <img src={largeImageURL} alt="picture" />
-
           </Modal> }
 
       </div>
