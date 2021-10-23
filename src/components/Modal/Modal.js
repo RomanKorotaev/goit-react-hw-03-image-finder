@@ -5,10 +5,9 @@ class Modal extends Component {
 
     render() {
         return (
-            <div className="Overlay">
-            <div className="Modal">
-              
-              <img src={this.props.largeImageURL} alt="" />
+            <div className= {s.Overlay}>
+            <div className={s.Modal}>
+                <img src={this.props.largeImageURL} alt="" />
             </div>
           </div>
         )

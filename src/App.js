@@ -27,8 +27,22 @@ state = {
   quiryWord: "",
   isLoading: false,
   largeImageURL: '',
+  showModal: false,
 
 }
+
+// toggleModal = ()=> {
+//   this.setState (prevState=> ({
+//     showModal: !this.state.showModal
+//   }))
+// }
+ 
+toggleModal = ()=> {
+  this.setState ( ({showModal})=> ({
+    showModal: !showModal
+  }))
+}
+
 
 componentDidMount () {
 
@@ -93,10 +107,14 @@ handleOnImgClick = (largeImageURL) => {
   console.log ('Сработала функция handleOnImgClick. Клинули на  Img   .   largeImageURL = ', largeImageURL);
   this.setState ({largeImageURL:  largeImageURL })
 
+  this.toggleModal();
 }
 
 
   render () {
+
+    const {imagesArray, showModal, largeImageURL} = this.state;
+    // const {handleOnImgClick, handleLoadMore} = this;
   
     return (
       <div>
@@ -105,12 +123,13 @@ handleOnImgClick = (largeImageURL) => {
         <Searchbar onSubmit= {this.handleSummitForm}/>
 
        <ImageGallery 
-       imagesArray= {this.state.imagesArray}
+       imagesArray= {imagesArray}
        onImgClick = {this.handleOnImgClick}/>
         
         <Loader />
         <Button onLoadMoreBtn = {this.handleLoadMore}/>
-        <Modal largeImageURL={this.state.largeImageURL}/>
+        { showModal && <Modal largeImageURL={largeImageURL}/> }
+        {/* <Modal largeImageURL={largeImageURL}/> */}
 
       </div>
     )
