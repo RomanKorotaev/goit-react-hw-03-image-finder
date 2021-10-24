@@ -53,17 +53,24 @@ componentDidUpdate (prevProp, prevState) {
     imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
     imageApiService.query = this.state.quiryWord; // обновляем значение поискового слова
 
-    imageApiService.fetchImages()
-    .then (hits=>{
-          // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-          if (hits.length !== 0) { 
-            this.setState ({imagesArray:  hits })
-            console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
-          }
-    });  
+    this.setState ({ isLoading: true})
+    
+    setTimeout(() => {
+      imageApiService.fetchImages()
+      .then (hits=>{
+            // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+            if (hits.length !== 0) { 
+              this.setState ({imagesArray:  hits })
+              console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
+            }
+      })
+      .finally( ()=> this.setState({isLoading: false}));
+    }, 1000);
+    
   }
  }
 
+ 
  
 
 handleSummitForm = quiryWord => {
