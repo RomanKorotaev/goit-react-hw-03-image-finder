@@ -6,9 +6,7 @@ import Button from './components/Button'
 import Modal from './components/Modal'
 
 import Loader from "react-loader-spinner";
-// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-import '../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 const imageApiService = new ImageApiService();
 
@@ -54,7 +52,7 @@ componentDidUpdate (prevProp, prevState) {
     imageApiService.query = this.state.quiryWord; // обновляем значение поискового слова
 
     this.setState ({ isLoading: true})
-    
+
     setTimeout(() => {
       imageApiService.fetchImages()
       .then (hits=>{
