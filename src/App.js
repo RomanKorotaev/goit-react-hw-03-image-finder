@@ -1,21 +1,14 @@
 import React, {Component} from 'react';
+import ImageApiService from './js/apiService'
 import Searchbar from './components/Searchbar'
-
 import ImageGallery from './components/ImageGallery'
-import ImageGalleryItem from './components/ImageGalleryItem'
-import Loader from './components/Loader'
 import Button from './components/Button'
 import Modal from './components/Modal'
 
+import Loader from "react-loader-spinner";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-
-// import './App.css'
-
-
-////------------------GET-запрос -------------------
-
-import ImageApiService from './js/apiService'
-
+import '../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 const imageApiService = new ImageApiService();
 
@@ -49,7 +42,7 @@ setTimeout(() => {
       })
       .finally( ()=> this.setState({isLoading: false}));
       
-}, 1500);
+}, 1000);
 
 }
 
@@ -70,6 +63,8 @@ componentDidUpdate (prevProp, prevState) {
     });  
   }
  }
+
+ 
 
 handleSummitForm = quiryWord => {
   console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
@@ -123,7 +118,7 @@ toggleModal = ()=> {
 
   render () {
 
-    const {imagesArray, showModal, largeImageURL} = this.state;
+    const {imagesArray, showModal, largeImageURL,isLoading } = this.state;
     // const {handleOnImgClick, handleLoadMore} = this;
   
     return (
@@ -132,14 +127,26 @@ toggleModal = ()=> {
        {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метот класса как пром в дочерний react-компонент  */}
         <Searchbar onSubmit= {this.handleSummitForm}/>
      
-      {this.state.isLoading && <Loader />}  
+      {/* {this.state.isLoading && <Loader />}   */}
+
+      {isLoading && (
+          <Loader
+            className="Loader"
+            type="Circles"
+            color="#00BFFF"
+            height={100}
+            width={100}
+          />
+        )}
 
        <ImageGallery 
        imagesArray= {imagesArray}
        onImgClick = {this.handleOnImgClick}/>
         
-        
+        {!isLoading && (  
         <Button onLoadMoreBtn = {this.handleLoadMore}/>
+        )}
+
 
        {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
         { showModal && <Modal onModalClose={this.toggleModal}>
