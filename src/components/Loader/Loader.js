@@ -7,10 +7,8 @@ class Loader extends Component {
 
     render() {
         return (
-            <div>
-           {/* <p> Loader. ЗАГРУЖАЕМ ... </p> */}
+          
            <img src ={loadingImg.jpg} width="240" alt="Loading..."/>
-           </div>
         )
     }
 }
